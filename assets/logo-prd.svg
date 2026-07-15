@@ -1,0 +1,6 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI PRD Logo">
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="#191919" stroke="#191919" stroke-width="1.2"/>
+  <path d="M13 10.8H23.4L28 15.4V29.2H13V10.8Z" stroke="#FFFFFF" stroke-width="2.15" stroke-linejoin="round"/>
+  <path d="M23.2 10.8V15.7H28" stroke="#FFFFFF" stroke-width="2.15" stroke-linejoin="round"/>
+  <path d="M17 20H24M17 24H22" stroke="#C4ADB8" stroke-width="2.1" stroke-linecap="round"/>
+</svg>

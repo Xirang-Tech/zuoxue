@@ -1,0 +1,10 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="课伴 Logo">
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="#191919" stroke="#191919" stroke-width="1.2"/>
+  <path d="M12.8 14.4V25.6" stroke="#14B8A6" stroke-width="2.3" stroke-linecap="round"/>
+  <g stroke="#FFFFFF" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16.4 14.5H24.8L28.3 18V25.5H16.4"/>
+    <path d="M24.8 14.5V18H28.3"/>
+    <path d="M16.9 20L25.6 16.5"/>
+    <path d="M16.9 20L25.6 23.5"/>
+  </g>
+</svg>

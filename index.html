@@ -1,0 +1,1292 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="佐学是一组面向真实学习与工作场景的 AI 产品，目前包含课伴、AI PRD、Web Workflow、产品范式等产品。"
+    />
+    <meta name="theme-color" content="#f8f7f3" />
+    <link rel="icon" href="./assets/favicon.png" type="image/png" />
+    <title>佐学｜把 AI 做成真正能解决问题的产品</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f8f7f3;
+        --paper-soft: #fcfbf8;
+        --ink: #1c1a18;
+        --ink-soft: #59544f;
+        --muted: #736c65;
+        --line: rgba(58, 51, 47, 0.14);
+        --accent: #75666a;
+        --accent-rgb: 117, 102, 106;
+        --accent-light: #cfc0bb;
+        --white: #fffdf9;
+        --shadow: 0 18px 48px rgba(47, 41, 37, 0.09);
+        --radius-lg: 12px;
+        --radius-md: 8px;
+        --container: 1240px;
+        --font-display: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", STSong, SimSun, Georgia, serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background: var(--paper);
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        overflow-x: clip;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgba(var(--accent-rgb), 0.42);
+        outline-offset: 4px;
+      }
+
+      .container {
+        width: min(calc(100% - 48px), var(--container));
+        margin-inline: auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 80;
+        border-bottom: 1px solid rgba(58, 51, 47, 0.1);
+        background: var(--paper);
+      }
+
+      .site-nav {
+        position: relative;
+        display: flex;
+        min-height: 76px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        flex: 0 0 auto;
+      }
+
+      .brand-name {
+        font-family: var(--font-display);
+        font-size: 21px;
+        font-weight: 700;
+        letter-spacing: -0.055em;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        color: var(--ink-soft);
+        font-size: 13px;
+        font-weight: 560;
+      }
+
+      .nav-links a,
+      .mobile-panel a {
+        transition: color 160ms ease;
+      }
+
+      .nav-links a:hover,
+      .mobile-panel a:hover {
+        color: var(--accent);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 0 20px;
+        background: var(--paper-soft);
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 650;
+        transition:
+          border-color 180ms ease,
+          background 180ms ease,
+          color 180ms ease;
+      }
+
+      .button:hover {
+        border-color: rgba(var(--accent-rgb), 0.34);
+        color: var(--accent);
+      }
+
+      .button.primary {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: var(--white);
+        box-shadow: none;
+      }
+
+      .button.primary:hover {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: var(--white);
+      }
+
+      .mobile-toggle {
+        display: none;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--paper-soft);
+        color: var(--ink);
+        cursor: pointer;
+      }
+
+      .mobile-toggle span,
+      .mobile-toggle span::before,
+      .mobile-toggle span::after {
+        display: block;
+        width: 18px;
+        height: 1.5px;
+        border-radius: 99px;
+        background: currentColor;
+        transition: transform 180ms ease;
+      }
+
+      .mobile-toggle span {
+        position: relative;
+      }
+
+      .mobile-toggle span::before,
+      .mobile-toggle span::after {
+        position: absolute;
+        left: 0;
+        content: "";
+      }
+
+      .mobile-toggle span::before {
+        top: -6px;
+      }
+
+      .mobile-toggle span::after {
+        top: 6px;
+      }
+
+      .mobile-toggle[aria-expanded="true"] span {
+        background: transparent;
+      }
+
+      .mobile-toggle[aria-expanded="true"] span::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .mobile-toggle[aria-expanded="true"] span::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      .mobile-panel {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        display: none;
+        width: min(320px, calc(100vw - 32px));
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(252, 251, 248, 0.98);
+        box-shadow: 0 16px 42px rgba(47, 41, 37, 0.11);
+      }
+
+      .mobile-panel.is-open {
+        display: grid;
+      }
+
+      .mobile-panel a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 48px;
+        border-bottom: 1px solid rgba(22, 24, 29, 0.08);
+        padding: 0 8px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .mobile-panel a:last-child {
+        border-bottom: 0;
+      }
+
+      .hero {
+        position: relative;
+        min-height: calc(100svh - 77px);
+        overflow: hidden;
+        padding: 0;
+        background: var(--paper);
+      }
+
+      .hero-grid {
+        position: relative;
+      }
+
+      .product-index {
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 760;
+        letter-spacing: 0.12em;
+      }
+
+      .hero-copy {
+        padding: clamp(64px, 8vh, 88px) 0 48px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        max-width: 1180px;
+        margin: 0 auto;
+        font-family: var(--font-display);
+        font-size: clamp(68px, 7vw, 100px);
+        font-weight: 700;
+        font-feature-settings: "palt" 1;
+        letter-spacing: -0.04em;
+        line-height: 1.02;
+      }
+
+      .hero h1 span {
+        display: block;
+      }
+
+      .hero h1 .accent {
+        margin-top: 8px;
+        color: var(--accent);
+      }
+
+      .hero-lead {
+        max-width: 820px;
+        margin: 30px auto 0;
+        color: var(--ink-soft);
+        font-size: clamp(16px, 1.35vw, 18px);
+        line-height: 1.9;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 32px;
+      }
+
+      .hero-actions .button {
+        min-height: 50px;
+        border-radius: 6px;
+        padding-inline: 25px;
+        font-size: 14px;
+      }
+
+      .hero-actions .button.primary {
+        box-shadow: none;
+      }
+
+      .hero-directory {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-directory a {
+        display: grid;
+        min-width: 0;
+        min-height: 122px;
+        align-items: start;
+        grid-template-columns: 30px minmax(0, 1fr);
+        gap: 12px;
+        padding: 28px 20px 30px;
+        transition:
+          background 180ms ease,
+          color 180ms ease;
+      }
+
+      .hero-directory a + a {
+        border-left: 1px solid var(--line);
+      }
+
+      .hero-directory a:hover {
+        background: rgba(var(--accent-rgb), 0.035);
+      }
+
+      .hero-product-number {
+        padding-top: 3px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 760;
+        letter-spacing: 0.1em;
+      }
+
+      .hero-product-copy {
+        min-width: 0;
+      }
+
+      .hero-product-copy strong {
+        display: block;
+        color: var(--ink);
+        font-size: 17px;
+        font-weight: 720;
+        letter-spacing: -0.03em;
+      }
+
+      .hero-product-copy small {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .products-intro {
+        scroll-margin-top: 92px;
+        padding: 112px 0 54px;
+        border-top: 1px solid var(--line);
+        background: var(--paper-soft);
+      }
+
+      .intro-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(300px, 0.55fr);
+        gap: 80px;
+        align-items: end;
+      }
+
+      .products-intro h2,
+      .principles h2,
+      .closing h2 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(42px, 5.2vw, 70px);
+        font-weight: 700;
+        font-feature-settings: "palt" 1;
+        letter-spacing: -0.042em;
+        line-height: 1.08;
+      }
+
+      .intro-copy {
+        margin: 0 0 4px;
+        color: var(--ink-soft);
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .product-story {
+        position: relative;
+        scroll-margin-top: 80px;
+        overflow: hidden;
+        border-top: 1px solid var(--line);
+        background: var(--paper-soft);
+      }
+
+      .story-grid {
+        position: relative;
+        display: grid;
+        min-height: 760px;
+        align-items: center;
+        grid-template-columns: minmax(410px, 0.82fr) minmax(0, 1.18fr);
+        gap: clamp(62px, 8vw, 118px);
+        padding-block: 100px;
+      }
+
+      .product-story.reverse .story-copy {
+        order: 2;
+      }
+
+      .product-story.reverse .story-visual {
+        order: 1;
+      }
+
+      .product-heading {
+        display: block;
+      }
+
+      .product-name {
+        display: block;
+        font-size: 19px;
+        font-weight: 720;
+        letter-spacing: -0.035em;
+      }
+
+      .product-type {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+      }
+
+      .product-index {
+        display: block;
+        margin-bottom: 27px;
+        color: rgb(var(--accent-rgb));
+      }
+
+      .story-copy h3 {
+        margin: 30px 0 0;
+        font-family: var(--font-display);
+        font-size: clamp(38px, 4.25vw, 58px);
+        font-weight: 700;
+        font-feature-settings: "palt" 1;
+        letter-spacing: -0.042em;
+        line-height: 1.13;
+      }
+
+      .story-lead {
+        margin: 24px 0 0;
+        color: var(--ink-soft);
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .story-moment {
+        margin-top: 30px;
+        padding: 17px 0 18px;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        color: var(--ink-soft);
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .story-moment strong {
+        display: block;
+        margin-bottom: 3px;
+        color: var(--ink);
+        font-size: 11px;
+        letter-spacing: 0.11em;
+      }
+
+      .outcome-label {
+        display: block;
+        margin-top: 27px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 720;
+        letter-spacing: 0.12em;
+      }
+
+      .outcomes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        margin-top: 14px;
+      }
+
+      .outcomes span {
+        border-bottom: 1px solid var(--line);
+        padding: 1px 0 4px;
+        color: var(--ink-soft);
+        font-size: 11px;
+        font-weight: 620;
+      }
+
+      .story-copy .button {
+        margin-top: 32px;
+        border-color: rgb(var(--accent-rgb));
+        background: rgb(var(--accent-rgb));
+        color: var(--white);
+      }
+
+      .story-copy .button:hover {
+        border-color: var(--ink);
+        background: var(--ink);
+        color: var(--white);
+      }
+
+      .story-visual {
+        position: relative;
+        display: grid;
+        gap: 12px;
+      }
+
+      .screen-frame {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: #ebe8e3;
+        box-shadow: var(--shadow);
+      }
+
+      .screen-frame > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .screen-frame.contain {
+        padding: 12px;
+        background: #efede8;
+      }
+
+      .screen-frame.contain > img {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        object-fit: contain;
+        background: var(--white);
+      }
+
+      .screen-note {
+        position: static;
+        display: flex;
+        width: min(72%, 430px);
+        max-width: none;
+        align-items: center;
+        border-radius: 0;
+        padding: 9px 0;
+        background: transparent;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 620;
+        letter-spacing: 0.025em;
+        line-height: 1.5;
+      }
+
+      .screen-note.top {
+        justify-self: end;
+        justify-content: flex-end;
+        border-bottom: 1px solid var(--line);
+        padding-top: 0;
+        text-align: right;
+      }
+
+      .screen-note.bottom {
+        border-top: 1px solid var(--line);
+        padding-bottom: 0;
+      }
+
+      .principles {
+        position: relative;
+        overflow: hidden;
+        padding: 128px 0;
+        background: #282522;
+        color: var(--white);
+      }
+
+      .principles h2 {
+        max-width: 760px;
+      }
+
+      .principle-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 78px;
+        border-top: 1px solid rgba(255, 253, 249, 0.16);
+      }
+
+      .principle {
+        min-height: 260px;
+        padding: 30px 34px 10px 0;
+        border-right: 1px solid rgba(255, 253, 249, 0.16);
+      }
+
+      .principle + .principle {
+        padding-left: 34px;
+      }
+
+      .principle:last-child {
+        border-right: 0;
+      }
+
+      .principle span {
+        color: var(--accent-light);
+        font-size: 11px;
+        font-weight: 760;
+        letter-spacing: 0.17em;
+      }
+
+      .principle h3 {
+        margin: 44px 0 0;
+        font-family: var(--font-display);
+        font-size: clamp(24px, 2.35vw, 33px);
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+
+      .principle p {
+        margin: 18px 0 0;
+        color: rgba(255, 253, 249, 0.64);
+        font-size: 14px;
+        line-height: 1.9;
+      }
+
+      .independent-note {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 20px;
+        align-items: start;
+        margin-top: 52px;
+        border-top: 1px solid rgba(255, 253, 249, 0.16);
+        border-bottom: 1px solid rgba(255, 253, 249, 0.16);
+        padding: 23px 0;
+      }
+
+      .independent-note strong {
+        color: var(--accent-light);
+        font-size: 12px;
+        letter-spacing: 0.12em;
+      }
+
+      .independent-note p {
+        margin: 0;
+        color: rgba(255, 253, 249, 0.68);
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .closing {
+        padding: 132px 0 120px;
+        background: var(--paper);
+      }
+
+      .closing-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 80px;
+        align-items: end;
+        padding-bottom: 54px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .closing h2 {
+        max-width: 850px;
+      }
+
+      .closing p {
+        max-width: 520px;
+        margin: 0 0 5px;
+        color: var(--ink-soft);
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      footer {
+        padding: 0 0 42px;
+        background: var(--paper);
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 28px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 22px;
+      }
+
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 1080px) {
+        .nav-links {
+          gap: 18px;
+        }
+
+        .hero h1 {
+          font-size: clamp(62px, 7.6vw, 82px);
+        }
+
+        .story-grid {
+          grid-template-columns: minmax(340px, 0.82fr) minmax(0, 1.18fr);
+          gap: 54px;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .container {
+          width: min(calc(100% - 34px), var(--container));
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-toggle {
+          display: grid;
+        }
+
+        .hero {
+          min-height: auto;
+          padding: 0;
+        }
+
+        .intro-grid,
+        .story-grid,
+        .closing-card {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-copy {
+          padding: 62px 0 44px;
+        }
+
+        .hero h1 {
+          max-width: 820px;
+          font-size: clamp(58px, 10vw, 78px);
+        }
+
+        .hero-directory {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .hero-directory a {
+          min-height: 112px;
+        }
+
+        .hero-directory a:nth-child(odd) {
+          border-left: 0;
+        }
+
+        .hero-directory a:nth-child(n + 3) {
+          border-top: 1px solid var(--line);
+        }
+
+        .products-intro {
+          padding-top: 90px;
+        }
+
+        .intro-grid {
+          gap: 28px;
+        }
+
+        .story-grid {
+          min-height: 0;
+          gap: 58px;
+          padding-block: 88px;
+        }
+
+        .product-story.reverse .story-copy,
+        .story-copy {
+          order: 1;
+        }
+
+        .product-story.reverse .story-visual,
+        .story-visual {
+          order: 2;
+        }
+
+        .story-copy {
+          max-width: 720px;
+        }
+
+        .principle-grid {
+          grid-template-columns: 1fr;
+          margin-top: 58px;
+        }
+
+        .principle,
+        .principle + .principle {
+          min-height: 0;
+          padding: 30px 0 38px;
+          border-right: 0;
+          border-bottom: 1px solid rgba(255, 253, 249, 0.16);
+        }
+
+        .principle:last-child {
+          border-bottom: 0;
+        }
+
+        .principle h3 {
+          margin-top: 26px;
+        }
+
+        .closing-card {
+          gap: 28px;
+        }
+
+        .closing p {
+          margin: 0;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .site-nav {
+          min-height: 68px;
+        }
+
+        .hero {
+          padding: 0;
+        }
+
+        .hero-copy {
+          padding: 44px 0 36px;
+        }
+
+        .hero h1 {
+          margin: 0 auto;
+          font-size: clamp(44px, 12.5vw, 56px);
+          letter-spacing: -0.04em;
+          line-height: 1.03;
+        }
+
+        .hero h1 .accent {
+          margin-top: 5px;
+        }
+
+        .hero-lead {
+          margin-top: 22px;
+          font-size: 15px;
+          line-height: 1.82;
+        }
+
+        .hero-actions {
+          margin-top: 28px;
+        }
+
+        .hero-actions .button {
+          width: 100%;
+        }
+
+        .hero-directory {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-directory a,
+        .hero-directory a + a,
+        .hero-directory a:nth-child(odd) {
+          min-height: 88px;
+          border-left: 0;
+          padding: 20px 8px 21px;
+        }
+
+        .hero-directory a + a {
+          border-top: 1px solid var(--line);
+        }
+
+        .products-intro {
+          padding: 78px 0 42px;
+        }
+
+        .products-intro h2,
+        .principles h2,
+        .closing h2 {
+          font-size: 42px;
+        }
+
+        .intro-copy {
+          font-size: 14px;
+        }
+
+        .story-grid {
+          gap: 47px;
+          padding-block: 72px;
+        }
+
+        .product-index {
+          margin-bottom: 22px;
+        }
+
+        .story-copy h3 {
+          margin-top: 26px;
+          font-size: 39px;
+        }
+
+        .story-lead {
+          font-size: 14px;
+          line-height: 1.85;
+        }
+
+        .screen-frame.contain {
+          padding: 10px;
+        }
+
+        .screen-frame.contain > img {
+          border-radius: 7px;
+        }
+
+        .screen-note {
+          display: flex;
+          width: 100%;
+          font-size: 10px;
+        }
+
+        .principles {
+          padding: 94px 0;
+        }
+
+        .independent-note {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          padding: 20px 0;
+        }
+
+        .closing {
+          padding: 92px 0 82px;
+        }
+
+        .footer-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .footer-links {
+          justify-content: flex-start;
+          gap: 15px 20px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav container" aria-label="主导航">
+        <a class="brand" href="https://zuoxue.com/" aria-label="佐学首页">
+          <span class="brand-name">佐学</span>
+        </a>
+
+        <div class="nav-links" aria-label="旗下产品">
+          <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
+          <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
+          <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">Web Workflow</a>
+          <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">产品范式</a>
+        </div>
+
+        <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="打开产品菜单">
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="mobile-panel" id="mobile-menu">
+          <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴 <span aria-hidden="true">↗</span></a>
+          <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD <span aria-hidden="true">↗</span></a>
+          <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">Web Workflow <span aria-hidden="true">↗</span></a>
+          <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">产品范式 <span aria-hidden="true">↗</span></a>
+          <a href="#products">浏览旗下产品 <span aria-hidden="true">↓</span></a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-grid container">
+          <div class="hero-copy">
+            <h1 id="hero-title">
+              <span>把 AI 做成</span>
+              <span class="accent">真正能解决问题的产品</span>
+            </h1>
+            <p class="hero-lead">
+              佐学是一组面向真实学习与工作场景的 AI 产品。每一款都从一个具体任务出发，把复杂过程变成可评审、可复盘或可以继续推进的成果。
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#products">浏览旗下产品 <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+
+          <nav class="hero-directory" aria-label="佐学旗下产品">
+            <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">
+              <span class="hero-product-number">01</span>
+              <span class="hero-product-copy">
+                <strong>课伴</strong>
+                <small>把课程变成可复习的学习资产</small>
+              </span>
+            </a>
+            <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">
+              <span class="hero-product-number">02</span>
+              <span class="hero-product-copy">
+                <strong>AI PRD</strong>
+                <small>让模糊需求长成可评审文档</small>
+              </span>
+            </a>
+            <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">
+              <span class="hero-product-number">03</span>
+              <span class="hero-product-copy">
+                <strong>Web Workflow</strong>
+                <small>把业务描述变成可验证工作流</small>
+              </span>
+            </a>
+            <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">
+              <span class="hero-product-number">04</span>
+              <span class="hero-product-copy">
+                <strong>产品范式</strong>
+                <small>先判断怎样 AI 化，再进入交付</small>
+              </span>
+            </a>
+          </nav>
+        </div>
+      </section>
+      <section class="products-intro" id="products" aria-labelledby="products-title">
+        <div class="intro-grid container">
+          <div>
+            <h2 id="products-title">围绕真实问题，持续做新的 AI 产品</h2>
+          </div>
+          <p class="intro-copy">
+            这里是佐学正在做的产品。它们彼此独立，服务不同场景；未来遇到值得解决的新问题，也会有新的产品加入。
+          </p>
+        </div>
+      </section>
+
+      <article class="product-story" aria-labelledby="keban-title">
+        <div class="story-grid container">
+          <div class="story-copy">
+            <span class="product-index">01</span>
+            <div class="product-heading">
+              <span class="product-name">课伴</span>
+              <span class="product-type">AI 课程学习工作台</span>
+            </div>
+            <h3 id="keban-title">让长课程结束后，仍然是一份可以继续使用的学习资产</h3>
+            <p class="story-lead">
+              从标签页音频、麦克风或文件开始，实时或离线转写课程，识别知识点，沉淀笔记与 AI 总结，并在学习地图中持续复盘。
+            </p>
+            <div class="story-moment">
+              <strong>适合这个时刻</strong>
+              当课程很长、信息密度高，听完以后还需要检索、复习和继续使用。
+            </div>
+            <span class="outcome-label">你会得到</span>
+            <div class="outcomes" aria-label="课伴产出">
+              <span>实时与离线转写</span><span>知识点识别</span><span>课程笔记</span><span>AI 总结</span><span>学习地图</span>
+            </div>
+            <a class="button" href="https://keban.zuoxue.com/" target="_blank" rel="noopener">进入课伴 <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="story-visual">
+            <div class="screen-note top">标签页 · 麦克风 · 本地文件</div>
+            <div class="screen-frame">
+              <img src="./assets/keban-demo-full.png" width="1440" height="900" loading="lazy" alt="课伴在听课过程中同步转写并生成 AI 摘要" />
+            </div>
+            <div class="screen-note bottom">转写不是终点，知识点和总结会继续沉淀</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-story reverse" aria-labelledby="aiprd-title">
+        <div class="story-grid container">
+          <div class="story-copy">
+            <span class="product-index">02</span>
+            <div class="product-heading">
+              <span class="product-name">AI PRD</span>
+              <span class="product-type">AI 产品文档空间</span>
+            </div>
+            <h3 id="aiprd-title">让一个模糊需求，长成可评审的产品文档</h3>
+            <p class="story-lead">
+              从需求背景开始，AI 帮你补齐用户故事、边界条件和验收标准，并让流程图、原型和评审意见留在同一份文档里。
+            </p>
+            <div class="story-moment">
+              <strong>适合这个时刻</strong>
+              当想法还不完整、评审临近，或团队需要快速统一需求上下文。
+            </div>
+            <span class="outcome-label">你会得到</span>
+            <div class="outcomes" aria-label="AI PRD 产出">
+              <span>PRD 草案</span><span>Mermaid 流程图</span><span>UI 原型</span><span>协作评审</span>
+            </div>
+            <a class="button" href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">进入 AI PRD <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="story-visual">
+            <div class="screen-note top">文档 · 流程图 · 原型</div>
+            <div class="screen-frame contain">
+              <img src="./assets/aiprd-ui.png" width="629" height="436" loading="lazy" alt="AI PRD 中的需求概览、验收标准和 AI 建议界面" />
+            </div>
+            <div class="screen-note bottom">评论、修改与评审留在同一份文档</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-story" aria-labelledby="workflow-title">
+        <div class="story-grid container">
+          <div class="story-copy">
+            <span class="product-index">03</span>
+            <div class="product-heading">
+              <span class="product-name">Web Workflow</span>
+              <span class="product-type">Coze 工作流生成与验证</span>
+            </div>
+            <h3 id="workflow-title">把业务描述，变成可以验证和导出的 Coze 工作流</h3>
+            <p class="story-lead">
+              先通过对话澄清需求，再生成节点级设计方案和可视化 DAG；在导出前完成模拟、测试、成本与版本检查。
+            </p>
+            <div class="story-moment">
+              <strong>适合这个时刻</strong>
+              当你有自动化需求，但还没确定 Coze 节点、分支、提示词和数据流。
+            </div>
+            <span class="outcome-label">你会得到</span>
+            <div class="outcomes" aria-label="Web Workflow 产出">
+              <span>设计方案</span><span>可视化 DAG</span><span>模拟与测试</span><span>Coze JSON / ZIP</span>
+            </div>
+            <a class="button" href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">进入 Web Workflow <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="story-visual">
+            <div class="screen-note top">需求澄清 → 节点设计 → 数据流</div>
+            <div class="screen-frame">
+              <img src="./assets/workflow-full.png" width="1440" height="900" loading="lazy" alt="Web Workflow 客服自动回复示例的可视化 DAG 与对话界面" />
+            </div>
+            <div class="screen-note bottom">模拟、测试、成本与版本都可继续检查</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-story reverse" aria-labelledby="paradigm-title">
+        <div class="story-grid container">
+          <div class="story-copy">
+            <span class="product-index">04</span>
+            <div class="product-heading">
+              <span class="product-name">产品范式</span>
+              <span class="product-type">AI 产品改造工作台</span>
+            </div>
+            <h3 id="paradigm-title">先判断产品该怎样 AI 化，再进入方案交付</h3>
+            <p class="story-lead">
+              输入业务、用户和目标，系统从 toC 与 toB 范式中给出诊断，再把方向推进为 PRD、竞品、商业化与汇报材料。
+            </p>
+            <div class="story-moment">
+              <strong>适合这个时刻</strong>
+              当旧产品准备 AI 升级，或新产品还不确定应该采用哪种 AI 交互形态。
+            </div>
+            <span class="outcome-label">你会得到</span>
+            <div class="outcomes" aria-label="产品范式产出">
+              <span>范式诊断</span><span>PRD</span><span>竞品与商业化</span><span>汇报 / PPT</span><span>项目归档</span>
+            </div>
+            <a class="button" href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">进入产品范式 <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="story-visual">
+            <div class="screen-note top">产品输入 · 范式诊断 · 方案交付</div>
+            <div class="screen-frame">
+              <img src="./assets/paradigm-full.png" width="1440" height="900" loading="lazy" alt="产品范式对任务代理 Agent 示例进行范式契合度诊断" />
+            </div>
+            <div class="screen-note bottom">从判断产品形态开始，而不是先堆 AI 功能</div>
+          </div>
+        </div>
+      </article>
+
+      <section class="principles" aria-labelledby="principles-title">
+        <div class="container">
+          <h2 id="principles-title">佐学如何做产品</h2>
+
+          <div class="principle-grid">
+            <article class="principle">
+              <span>01</span>
+              <h3>从具体任务开始</h3>
+              <p>先确认用户眼下要完成什么，再决定 AI 应该出现在流程的哪一部分。</p>
+            </article>
+            <article class="principle">
+              <span>02</span>
+              <h3>让 AI 进入完整过程</h3>
+              <p>AI 参与澄清、生成、检查和迭代，而不只停留在一次回答或一段文案。</p>
+            </article>
+            <article class="principle">
+              <span>03</span>
+              <h3>留下可继续使用的成果</h3>
+              <p>文档、工作流、产品项目和学习记录，都能被评审、复盘和继续推进。</p>
+            </article>
+          </div>
+
+          <div class="independent-note">
+            <strong>独立使用</strong>
+            <p>佐学的产品各自服务一种具体场景。你不需要先进入同一套流程，只需选择现在正在解决的问题。新的问题，也会带来新的产品。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="container closing-card">
+          <div>
+            <h2 id="closing-title">从一个具体问题开始</h2>
+          </div>
+          <p>佐学会继续围绕真实的学习与工作场景，做更多具体、可用、可以长期使用的 AI 产品。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner container">
+        <div>© 2026 佐学</div>
+        <div class="footer-links" aria-label="产品链接">
+          <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
+          <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
+          <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">Web Workflow</a>
+          <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">产品范式</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const toggle = document.querySelector(".mobile-toggle");
+        const menu = document.querySelector("#mobile-menu");
+        if (!toggle || !menu) return;
+
+        const setOpen = (open) => {
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.setAttribute("aria-label", open ? "关闭产品菜单" : "打开产品菜单");
+          menu.classList.toggle("is-open", open);
+        };
+
+        toggle.addEventListener("click", () => {
+          setOpen(toggle.getAttribute("aria-expanded") !== "true");
+        });
+
+        menu.addEventListener("click", (event) => {
+          if (event.target.closest("a")) setOpen(false);
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            setOpen(false);
+            toggle.focus();
+          }
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!menu.contains(event.target) && !toggle.contains(event.target)) setOpen(false);
+        });
+      })();
+    </script>
+  </body>
+</html>

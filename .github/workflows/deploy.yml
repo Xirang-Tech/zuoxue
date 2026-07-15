@@ -1,0 +1,35 @@
+name: Deploy zuoxue.com
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare dist
+        run: |
+          mkdir -p dist
+          cp index.html dist/
+          cp -R assets dist/
+          cp MP_verify_*.txt dist/ 2>/dev/null || true
+
+      - name: Deploy to server via SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$REMOTE_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+          # Remote has scp/tar but no rsync; sync via tar over SSH.
+          tar czf - -C dist . | ssh -i ~/.ssh/deploy_key \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes \
+            "deploy@${REMOTE_HOST}" \
+            'tmp=$(mktemp -d) && tar xzf - -C "$tmp" && rm -rf /opt/zuoxue-website/dist/* /opt/zuoxue-website/dist/.[!.]* 2>/dev/null; cp -a "$tmp"/. /opt/zuoxue-website/dist/ && rm -rf "$tmp"'

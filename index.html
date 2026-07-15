@@ -989,6 +989,53 @@
           animation-iteration-count: 1 !important;
         }
       }
+
+      .site-toast {
+        position: fixed;
+        top: max(88px, env(safe-area-inset-top, 0px) + 72px);
+        left: 50%;
+        z-index: 80;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: max-content;
+        max-width: min(420px, calc(100vw - 32px));
+        padding: 14px 18px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: rgba(252, 251, 248, 0.96);
+        box-shadow: var(--shadow);
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1.4;
+        transform: translate(-50%, -12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+
+      .site-toast[hidden] {
+        display: none !important;
+      }
+
+      .site-toast.is-visible {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      .site-toast-dot {
+        flex: 0 0 auto;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      a[data-coming-soon] {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -1001,8 +1048,8 @@
         <div class="nav-links" aria-label="旗下产品">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
-          <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">Web Workflow</a>
-          <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">产品范式</a>
+          <a href="#" data-coming-soon>Web Workflow</a>
+          <a href="#" data-coming-soon>产品范式</a>
         </div>
 
         <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="打开产品菜单">
@@ -1011,8 +1058,8 @@
         <div class="mobile-panel" id="mobile-menu">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴 <span aria-hidden="true">↗</span></a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD <span aria-hidden="true">↗</span></a>
-          <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">Web Workflow <span aria-hidden="true">↗</span></a>
-          <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">产品范式 <span aria-hidden="true">↗</span></a>
+          <a href="#" data-coming-soon>Web Workflow</a>
+          <a href="#" data-coming-soon>产品范式</a>
           <a href="#products">浏览旗下产品 <span aria-hidden="true">↓</span></a>
         </div>
       </nav>
@@ -1049,14 +1096,14 @@
                 <small>让模糊需求长成可评审文档</small>
               </span>
             </a>
-            <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">
+            <a href="#" data-coming-soon>
               <span class="hero-product-number">03</span>
               <span class="hero-product-copy">
                 <strong>Web Workflow</strong>
                 <small>把业务描述变成可验证工作流</small>
               </span>
             </a>
-            <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">
+            <a href="#" data-coming-soon>
               <span class="hero-product-number">04</span>
               <span class="hero-product-copy">
                 <strong>产品范式</strong>
@@ -1161,7 +1208,7 @@
             <div class="outcomes" aria-label="Web Workflow 产出">
               <span>设计方案</span><span>可视化 DAG</span><span>模拟与测试</span><span>Coze JSON / ZIP</span>
             </div>
-            <a class="button" href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">进入 Web Workflow <span aria-hidden="true">↗</span></a>
+            <a class="button" href="#" data-coming-soon>进入 Web Workflow</a>
           </div>
           <div class="story-visual">
             <div class="screen-note top">需求澄清 → 节点设计 → 数据流</div>
@@ -1193,7 +1240,7 @@
             <div class="outcomes" aria-label="产品范式产出">
               <span>范式诊断</span><span>PRD</span><span>竞品与商业化</span><span>汇报 / PPT</span><span>项目归档</span>
             </div>
-            <a class="button" href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">进入产品范式 <span aria-hidden="true">↗</span></a>
+            <a class="button" href="#" data-coming-soon>进入产品范式</a>
           </div>
           <div class="story-visual">
             <div class="screen-note top">产品输入 · 范式诊断 · 方案交付</div>
@@ -1250,16 +1297,48 @@
         <div class="footer-links" aria-label="产品链接">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
-          <a href="https://workflow.zuoxue.com/" target="_blank" rel="noopener">Web Workflow</a>
-          <a href="https://paradigm.zuoxue.com/" target="_blank" rel="noopener">产品范式</a>
+          <a href="#" data-coming-soon>Web Workflow</a>
+          <a href="#" data-coming-soon>产品范式</a>
         </div>
       </div>
     </footer>
+
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite" hidden>
+      <span class="site-toast-dot" aria-hidden="true"></span>
+      <span class="site-toast-text">暂未上线，敬请期待</span>
+    </div>
 
     <script>
       (() => {
         const toggle = document.querySelector(".mobile-toggle");
         const menu = document.querySelector("#mobile-menu");
+        const toast = document.querySelector("#site-toast");
+        const toastText = toast?.querySelector(".site-toast-text");
+        let hideTimer;
+        let clearTimer;
+
+        const showToast = (message = "暂未上线，敬请期待") => {
+          if (!toast || !toastText) return;
+          toastText.textContent = message;
+          clearTimeout(hideTimer);
+          clearTimeout(clearTimer);
+          toast.hidden = false;
+          requestAnimationFrame(() => toast.classList.add("is-visible"));
+          hideTimer = setTimeout(() => {
+            toast.classList.remove("is-visible");
+            clearTimer = setTimeout(() => {
+              toast.hidden = true;
+            }, 220);
+          }, 2400);
+        };
+
+        document.addEventListener("click", (event) => {
+          const link = event.target.closest("[data-coming-soon]");
+          if (!link) return;
+          event.preventDefault();
+          showToast("暂未上线，敬请期待");
+        });
+
         if (!toggle || !menu) return;
 
         const setOpen = (open) => {

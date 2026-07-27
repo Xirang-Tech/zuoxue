@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="佐学是一组面向真实学习与工作场景的 AI 产品，目前包含课伴、AI PRD、Web Workflow、产品范式等产品。"
+      content="佐学面向学习和实践 AI 产品与应用的人，围绕听课、理解、练习和产出中的具体问题，持续开发独立、可用的 AI 产品。"
     />
     <meta name="theme-color" content="#f8f7f3" />
     <link rel="icon" href="./assets/favicon.png" type="image/png" />
-    <title>佐学｜把 AI 做成真正能解决问题的产品</title>
+    <title>佐学｜做学问，用佐学</title>
     <style>
       :root {
         color-scheme: light;
@@ -102,10 +102,12 @@
       }
 
       .brand-name {
-        font-family: var(--font-display);
-        font-size: 21px;
-        font-weight: 700;
-        letter-spacing: -0.055em;
+        display: block;
+        font-family: inherit;
+        font-size: 19px;
+        font-weight: 720;
+        letter-spacing: -0.04em;
+        line-height: 1;
       }
 
       .nav-links {
@@ -253,7 +255,7 @@
 
       .hero {
         position: relative;
-        min-height: calc(100svh - 77px);
+        min-height: min(600px, calc(100svh - 77px));
         overflow: hidden;
         padding: 0;
         background: var(--paper);
@@ -271,54 +273,215 @@
       }
 
       .hero-copy {
-        padding: clamp(64px, 8vh, 88px) 0 48px;
-        text-align: center;
+        --hero-offset: clamp(96px, 10vw, 170px);
+        display: grid;
+        max-width: 1160px;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        column-gap: clamp(18px, 2.2vw, 32px);
+        margin: 0 auto;
+        padding: clamp(48px, 6vh, 60px) 0 36px;
+        text-align: left;
+      }
+
+      .hero-kicker {
+        display: flex;
+        grid-column: 1 / -1;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 720;
+        letter-spacing: 0.15em;
+        line-height: 1;
+      }
+
+      .hero-kicker::before {
+        width: 34px;
+        height: 1px;
+        flex: 0 0 auto;
+        background: var(--accent-light);
+        content: "";
       }
 
       .hero h1 {
-        max-width: 1180px;
-        margin: 0 auto;
+        grid-column: 1 / span 8;
+        grid-row: 2;
+        max-width: 980px;
+        margin: 0;
         font-family: var(--font-display);
-        font-size: clamp(68px, 7vw, 100px);
+        font-size: clamp(68px, 7vw, 98px);
         font-weight: 700;
         font-feature-settings: "palt" 1;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.045em;
         line-height: 1.02;
       }
 
       .hero h1 span {
         display: block;
+        width: max-content;
+        max-width: 100%;
       }
 
-      .hero h1 .accent {
-        margin-top: 8px;
+      .hero h1 span + span {
+        margin-top: 14px;
+        margin-left: var(--hero-offset);
+      }
+
+      .hero-thesis {
+        display: flex;
+        grid-column: 9 / -1;
+        grid-row: 2;
+        align-self: end;
+        align-items: center;
+        gap: 26px;
+        margin: 0 0 12px;
+      }
+
+      .hero-thesis p {
+        max-width: 190px;
+        margin: 0;
         color: var(--accent);
+        font-size: 12px;
+        font-weight: 560;
+        letter-spacing: 0.035em;
+        line-height: 1.9;
+      }
+
+      .learning-triangle {
+        position: relative;
+        width: 124px;
+        height: 100px;
+        flex: 0 0 auto;
+        font-family: var(--font-display);
+      }
+
+      .learning-triangle::before,
+      .learning-triangle::after {
+        position: absolute;
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        content: "";
+      }
+
+      .learning-triangle::before {
+        inset: 10px 16px 7px;
+        background: var(--accent-light);
+      }
+
+      .learning-triangle::after {
+        inset: 12px 18px 9px;
+        background: var(--paper);
+      }
+
+      .triangle-label,
+      .triangle-center {
+        position: absolute;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        background: var(--paper);
+        line-height: 1;
+      }
+
+      .triangle-label {
+        width: 30px;
+        height: 30px;
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 650;
+      }
+
+      .triangle-learn {
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .triangle-question {
+        bottom: -1px;
+        left: 0;
+      }
+
+      .triangle-do {
+        right: 0;
+        bottom: -1px;
+      }
+
+      .triangle-center {
+        top: 54px;
+        left: 50%;
+        width: 28px;
+        height: 20px;
+        transform: translate(-50%, -50%);
+        color: var(--accent);
+        font-family: var(--font-sans);
+        font-size: 11px;
+        font-weight: 760;
+        letter-spacing: 0.08em;
       }
 
       .hero-lead {
-        max-width: 820px;
-        margin: 30px auto 0;
+        grid-column: 2 / span 7;
+        grid-row: 3;
+        max-width: 650px;
+        margin: 36px 0 0;
         color: var(--ink-soft);
-        font-size: clamp(16px, 1.35vw, 18px);
-        line-height: 1.9;
+        font-size: 14px;
+        line-height: 1.95;
+        text-align: left;
       }
 
       .hero-actions {
         display: flex;
+        grid-column: 10 / -1;
+        grid-row: 3;
         align-items: center;
-        justify-content: center;
-        margin-top: 32px;
+        align-self: start;
+        justify-content: flex-end;
+        margin: 36px 0 0;
       }
 
-      .hero-actions .button {
-        min-height: 50px;
-        border-radius: 6px;
-        padding-inline: 25px;
-        font-size: 14px;
+      .hero-text-link {
+        display: inline-flex;
+        min-height: 40px;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 680;
+        letter-spacing: 0.04em;
+        transition: color 180ms ease;
       }
 
-      .hero-actions .button.primary {
-        box-shadow: none;
+      .hero-text-link::before {
+        width: 34px;
+        height: 1px;
+        flex: 0 0 auto;
+        background: var(--accent-light);
+        content: "";
+        transition:
+          width 180ms ease,
+          background 180ms ease;
+      }
+
+      .hero-text-link span {
+        color: var(--accent);
+      }
+
+      .hero-text-link:hover {
+        color: var(--accent);
+      }
+
+      .hero-text-link:hover::before {
+        width: 48px;
+        background: var(--accent);
+      }
+
+      .hero-text-link:focus-visible {
+        border-radius: 2px;
+        outline: 2px solid var(--accent);
+        outline-offset: 5px;
       }
 
       .hero-directory {
@@ -736,6 +899,38 @@
           font-size: clamp(62px, 7.6vw, 82px);
         }
 
+        .hero-thesis {
+          gap: 18px;
+        }
+
+        .hero-thesis p {
+          max-width: 170px;
+        }
+
+        .learning-triangle {
+          width: 104px;
+          height: 84px;
+        }
+
+        .learning-triangle::before {
+          inset: 9px 14px 6px;
+        }
+
+        .learning-triangle::after {
+          inset: 11px 16px 8px;
+        }
+
+        .triangle-label {
+          width: 26px;
+          height: 26px;
+          font-size: 17px;
+        }
+
+        .triangle-center {
+          top: 46px;
+          font-size: 10px;
+        }
+
         .story-grid {
           grid-template-columns: minmax(340px, 0.82fr) minmax(0, 1.18fr);
           gap: 54px;
@@ -767,12 +962,35 @@
         }
 
         .hero-copy {
-          padding: 62px 0 44px;
+          --hero-offset: clamp(56px, 10vw, 90px);
+          display: block;
+          max-width: 760px;
+          padding: 52px 0 40px;
         }
 
         .hero h1 {
-          max-width: 820px;
+          max-width: 760px;
           font-size: clamp(58px, 10vw, 78px);
+        }
+
+        .hero-lead {
+          max-width: 620px;
+          margin: 14px 0 0 var(--hero-offset);
+        }
+
+        .hero-thesis {
+          max-width: 620px;
+          gap: 22px;
+          margin: 24px 0 0 var(--hero-offset);
+        }
+
+        .hero-thesis p {
+          max-width: none;
+        }
+
+        .hero-actions {
+          justify-content: flex-start;
+          margin: 22px 0 0 var(--hero-offset);
         }
 
         .hero-directory {
@@ -859,32 +1077,89 @@
         }
 
         .hero-copy {
-          padding: 44px 0 36px;
+          --hero-offset: 28px;
+          padding: 40px 0 34px;
+        }
+
+        .hero-kicker {
+          gap: 10px;
+          margin-bottom: 20px;
+          font-size: 10px;
+        }
+
+        .hero-kicker::before {
+          width: 24px;
         }
 
         .hero h1 {
-          margin: 0 auto;
+          margin: 0;
           font-size: clamp(44px, 12.5vw, 56px);
           letter-spacing: -0.04em;
           line-height: 1.03;
         }
 
-        .hero h1 .accent {
+        .hero h1 span {
+          display: block;
+        }
+
+        .hero h1 span + span {
           margin-top: 5px;
+          margin-left: var(--hero-offset);
         }
 
         .hero-lead {
-          margin-top: 22px;
+          max-width: none;
+          margin: 14px 0 0;
           font-size: 15px;
           line-height: 1.82;
         }
 
-        .hero-actions {
-          margin-top: 28px;
+        .hero-thesis {
+          max-width: none;
+          gap: 16px;
+          margin: 20px 0 0;
         }
 
-        .hero-actions .button {
-          width: 100%;
+        .hero-thesis p {
+          font-size: 12px;
+          letter-spacing: 0.02em;
+          line-height: 1.7;
+        }
+
+        .learning-triangle {
+          width: 72px;
+          height: 60px;
+        }
+
+        .learning-triangle::before {
+          inset: 8px 10px 5px;
+        }
+
+        .learning-triangle::after {
+          inset: 10px 12px 7px;
+        }
+
+        .triangle-label {
+          width: 22px;
+          height: 22px;
+          font-size: 14px;
+        }
+
+        .triangle-center {
+          top: 33px;
+          font-size: 9px;
+        }
+
+        .hero-actions {
+          margin: 20px 0 0;
+        }
+
+        .hero-text-link::before {
+          width: 28px;
+        }
+
+        .hero-text-link:hover::before {
+          width: 40px;
         }
 
         .hero-directory {
@@ -1048,7 +1323,7 @@
         <div class="nav-links" aria-label="旗下产品">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
-          <a href="#" data-coming-soon>Web Workflow</a>
+          <a href="#" data-coming-soon>Vibe Workflow</a>
           <a href="#" data-coming-soon>产品范式</a>
         </div>
 
@@ -1058,9 +1333,9 @@
         <div class="mobile-panel" id="mobile-menu">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴 <span aria-hidden="true">↗</span></a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD <span aria-hidden="true">↗</span></a>
-          <a href="#" data-coming-soon>Web Workflow</a>
+          <a href="#" data-coming-soon>Vibe Workflow</a>
           <a href="#" data-coming-soon>产品范式</a>
-          <a href="#products">浏览旗下产品 <span aria-hidden="true">↓</span></a>
+          <a href="#products">查看产品 <span aria-hidden="true">↓</span></a>
         </div>
       </nav>
     </header>
@@ -1069,15 +1344,28 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-grid container">
           <div class="hero-copy">
+            <p class="hero-kicker">AI 学习与实践产品</p>
             <h1 id="hero-title">
-              <span>把 AI 做成</span>
-              <span class="accent">真正能解决问题的产品</span>
+              <span>做学问，</span><span>用佐学</span>
             </h1>
+            <div class="hero-thesis">
+              <div
+                class="learning-triangle"
+                role="img"
+                aria-label="学、问、做构成学习的三个过程，佐学在其中提供辅助"
+              >
+                <span class="triangle-label triangle-learn" aria-hidden="true">学</span>
+                <span class="triangle-label triangle-question" aria-hidden="true">问</span>
+                <span class="triangle-label triangle-do" aria-hidden="true">做</span>
+                <span class="triangle-center" aria-hidden="true">佐</span>
+              </div>
+              <p>学，是理解；问，是探索；做，是让所学真正发生。</p>
+            </div>
             <p class="hero-lead">
-              佐学是一组面向真实学习与工作场景的 AI 产品。每一款都从一个具体任务出发，把复杂过程变成可评审、可复盘或可以继续推进的成果。
+              佐学为正在学习和实践 AI 产品与应用的人做产品。我们关注听课、理解、练习和产出中的具体卡点，用 AI 让知识更容易沉淀，让想法更容易成为可以继续推进的成果。
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="#products">浏览旗下产品 <span aria-hidden="true">↓</span></a>
+              <a class="hero-text-link" href="#products">查看产品 <span aria-hidden="true">↓</span></a>
             </div>
           </div>
 
@@ -1086,28 +1374,28 @@
               <span class="hero-product-number">01</span>
               <span class="hero-product-copy">
                 <strong>课伴</strong>
-                <small>把课程变成可复习的学习资产</small>
+                <small>实时转写课程，识别知识点并整理笔记</small>
               </span>
             </a>
             <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">
               <span class="hero-product-number">02</span>
               <span class="hero-product-copy">
                 <strong>AI PRD</strong>
-                <small>让模糊需求长成可评审文档</small>
+                <small>从一句需求生成 PRD、流程图和原型</small>
               </span>
             </a>
             <a href="#" data-coming-soon>
               <span class="hero-product-number">03</span>
               <span class="hero-product-copy">
-                <strong>Web Workflow</strong>
-                <small>把业务描述变成可验证工作流</small>
+                <strong>Vibe Workflow</strong>
+                <small>用自然语言创建工作流</small>
               </span>
             </a>
             <a href="#" data-coming-soon>
               <span class="hero-product-number">04</span>
               <span class="hero-product-copy">
                 <strong>产品范式</strong>
-                <small>先判断怎样 AI 化，再进入交付</small>
+                <small>把产品想法变成可落地的 AI 方案</small>
               </span>
             </a>
           </nav>
@@ -1116,10 +1404,10 @@
       <section class="products-intro" id="products" aria-labelledby="products-title">
         <div class="intro-grid container">
           <div>
-            <h2 id="products-title">围绕真实问题，持续做新的 AI 产品</h2>
+            <h2 id="products-title">学习 AI，不只发生在课堂里</h2>
           </div>
           <p class="intro-copy">
-            这里是佐学正在做的产品。它们彼此独立，服务不同场景；未来遇到值得解决的新问题，也会有新的产品加入。
+            听课时要留下重点，实践时要把想法变成文档、工作流和产品方案。佐学从这些具体问题出发，让每款产品独立解决一个卡点。
           </p>
         </div>
       </section>
@@ -1132,16 +1420,16 @@
               <span class="product-name">课伴</span>
               <span class="product-type">AI 课程学习工作台</span>
             </div>
-            <h3 id="keban-title">让长课程结束后，仍然是一份可以继续使用的学习资产</h3>
+            <h3 id="keban-title">听课的同时，自动转写、识别知识点并整理笔记</h3>
             <p class="story-lead">
-              从标签页音频、麦克风或文件开始，实时或离线转写课程，识别知识点，沉淀笔记与 AI 总结，并在学习地图中持续复盘。
+              课伴支持标签页音频、麦克风和本地文件，可实时或离线转写课程内容，同步识别知识点，并生成课程笔记与 AI 摘要。
             </p>
             <div class="story-moment">
-              <strong>适合这个时刻</strong>
-              当课程很长、信息密度高，听完以后还需要检索、复习和继续使用。
+              <strong>适合这些场景</strong>
+              直播课、录播课、线上会议或线下讲座内容较长，需要完整记录，并在结束后快速找到重点。
             </div>
-            <span class="outcome-label">你会得到</span>
-            <div class="outcomes" aria-label="课伴产出">
+            <span class="outcome-label">主要能力</span>
+            <div class="outcomes" aria-label="课伴主要能力">
               <span>实时与离线转写</span><span>知识点识别</span><span>课程笔记</span><span>AI 总结</span><span>学习地图</span>
             </div>
             <a class="button" href="https://keban.zuoxue.com/" target="_blank" rel="noopener">进入课伴 <span aria-hidden="true">↗</span></a>
@@ -1151,7 +1439,7 @@
             <div class="screen-frame">
               <img src="./assets/keban-demo-full.png" width="1440" height="900" loading="lazy" alt="课伴在听课过程中同步转写并生成 AI 摘要" />
             </div>
-            <div class="screen-note bottom">转写不是终点，知识点和总结会继续沉淀</div>
+            <div class="screen-note bottom">课程结束后，可继续查看转写、知识点、笔记与摘要</div>
           </div>
         </div>
       </article>
@@ -1164,26 +1452,26 @@
               <span class="product-name">AI PRD</span>
               <span class="product-type">AI 产品文档空间</span>
             </div>
-            <h3 id="aiprd-title">让一个模糊需求，长成可评审的产品文档</h3>
+            <h3 id="aiprd-title">从一句需求开始，完成一份可以评审的 PRD</h3>
             <p class="story-lead">
-              从需求背景开始，AI 帮你补齐用户故事、边界条件和验收标准，并让流程图、原型和评审意见留在同一份文档里。
+              AI PRD 根据需求补全用户故事、边界条件和验收标准，并在同一份文档中生成 Mermaid 流程图、UI 原型，支持评论、修改与协作评审。
             </p>
             <div class="story-moment">
-              <strong>适合这个时刻</strong>
-              当想法还不完整、评审临近，或团队需要快速统一需求上下文。
+              <strong>适合这些场景</strong>
+              需求还不完整，但需要尽快形成可讨论、可修改、可交给团队继续推进的产品文档。
             </div>
-            <span class="outcome-label">你会得到</span>
-            <div class="outcomes" aria-label="AI PRD 产出">
-              <span>PRD 草案</span><span>Mermaid 流程图</span><span>UI 原型</span><span>协作评审</span>
+            <span class="outcome-label">主要能力</span>
+            <div class="outcomes" aria-label="AI PRD 主要能力">
+              <span>AI 辅助写作</span><span>用户故事与验收标准</span><span>Mermaid 流程图</span><span>UI 原型</span><span>协作评审</span>
             </div>
             <a class="button" href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">进入 AI PRD <span aria-hidden="true">↗</span></a>
           </div>
           <div class="story-visual">
-            <div class="screen-note top">文档 · 流程图 · 原型</div>
+            <div class="screen-note top">PRD · 流程图 · UI 原型</div>
             <div class="screen-frame contain">
               <img src="./assets/aiprd-ui.png" width="629" height="436" loading="lazy" alt="AI PRD 中的需求概览、验收标准和 AI 建议界面" />
             </div>
-            <div class="screen-note bottom">评论、修改与评审留在同一份文档</div>
+            <div class="screen-note bottom">写作、评论、修改与评审都在同一份文档中</div>
           </div>
         </div>
       </article>
@@ -1193,29 +1481,29 @@
           <div class="story-copy">
             <span class="product-index">03</span>
             <div class="product-heading">
-              <span class="product-name">Web Workflow</span>
-              <span class="product-type">Coze 工作流生成与验证</span>
+              <span class="product-name">Vibe Workflow</span>
+              <span class="product-type">自然语言工作流生成器</span>
             </div>
-            <h3 id="workflow-title">把业务描述，变成可以验证和导出的 Coze 工作流</h3>
+            <h3 id="workflow-title">用自然语言创建工作流</h3>
             <p class="story-lead">
-              先通过对话澄清需求，再生成节点级设计方案和可视化 DAG；在导出前完成模拟、测试、成本与版本检查。
+              描述你想自动化的业务，Vibe Workflow 会通过对话补齐节点、分支、提示词和数据流，生成设计方案与可视化 DAG，并支持模拟、测试和 Coze 导出。
             </p>
             <div class="story-moment">
-              <strong>适合这个时刻</strong>
-              当你有自动化需求，但还没确定 Coze 节点、分支、提示词和数据流。
+              <strong>适合这些场景</strong>
+              已经知道要自动化什么，但不熟悉 Coze 节点配置，或不想从空白画布开始搭建。
             </div>
-            <span class="outcome-label">你会得到</span>
-            <div class="outcomes" aria-label="Web Workflow 产出">
-              <span>设计方案</span><span>可视化 DAG</span><span>模拟与测试</span><span>Coze JSON / ZIP</span>
+            <span class="outcome-label">主要能力</span>
+            <div class="outcomes" aria-label="Vibe Workflow 主要能力">
+              <span>设计方案</span><span>节点与连线</span><span>可视化 DAG</span><span>模拟与测试</span><span>Coze JSON / ZIP</span>
             </div>
-            <a class="button" href="#" data-coming-soon>进入 Web Workflow</a>
+            <a class="button" href="#" data-coming-soon>进入 Vibe Workflow</a>
           </div>
           <div class="story-visual">
-            <div class="screen-note top">需求澄清 → 节点设计 → 数据流</div>
+            <div class="screen-note top">自然语言描述 → 节点与数据流</div>
             <div class="screen-frame">
-              <img src="./assets/workflow-full.png" width="1440" height="900" loading="lazy" alt="Web Workflow 客服自动回复示例的可视化 DAG 与对话界面" />
+              <img src="./assets/workflow-full.png" width="1440" height="900" loading="lazy" alt="Vibe Workflow 客服自动回复示例的可视化 DAG 与对话界面" />
             </div>
-            <div class="screen-note bottom">模拟、测试、成本与版本都可继续检查</div>
+            <div class="screen-note bottom">生成后可继续模拟、测试，并检查成本与版本</div>
           </div>
         </div>
       </article>
@@ -1228,26 +1516,26 @@
               <span class="product-name">产品范式</span>
               <span class="product-type">AI 产品改造工作台</span>
             </div>
-            <h3 id="paradigm-title">先判断产品该怎样 AI 化，再进入方案交付</h3>
+            <h3 id="paradigm-title">把一个产品想法，改造成可落地的 AI 产品方案</h3>
             <p class="story-lead">
-              输入业务、用户和目标，系统从 toC 与 toB 范式中给出诊断，再把方向推进为 PRD、竞品、商业化与汇报材料。
+              输入产品定位、目标用户、界面形态、主要功能和改造目标，系统会判断更合适的 AI 产品范式，并继续生成 PRD、竞品分析、商业化方案和汇报材料。
             </p>
             <div class="story-moment">
-              <strong>适合这个时刻</strong>
-              当旧产品准备 AI 升级，或新产品还不确定应该采用哪种 AI 交互形态。
+              <strong>适合这些场景</strong>
+              有一个新产品想法，或准备改造已有产品，但还不确定应该采用哪种 AI 产品形态。
             </div>
-            <span class="outcome-label">你会得到</span>
-            <div class="outcomes" aria-label="产品范式产出">
-              <span>范式诊断</span><span>PRD</span><span>竞品与商业化</span><span>汇报 / PPT</span><span>项目归档</span>
+            <span class="outcome-label">主要能力</span>
+            <div class="outcomes" aria-label="产品范式主要能力">
+              <span>范式诊断</span><span>PRD</span><span>竞品分析</span><span>商业化方案</span><span>汇报与 PPT</span><span>项目归档</span>
             </div>
             <a class="button" href="#" data-coming-soon>进入产品范式</a>
           </div>
           <div class="story-visual">
-            <div class="screen-note top">产品输入 · 范式诊断 · 方案交付</div>
+            <div class="screen-note top">产品输入 → 范式诊断 → 方案生成</div>
             <div class="screen-frame">
               <img src="./assets/paradigm-full.png" width="1440" height="900" loading="lazy" alt="产品范式对任务代理 Agent 示例进行范式契合度诊断" />
             </div>
-            <div class="screen-note bottom">从判断产品形态开始，而不是先堆 AI 功能</div>
+            <div class="screen-note bottom">先确定产品形态，再继续生成 PRD 与汇报材料</div>
           </div>
         </div>
       </article>
@@ -1259,24 +1547,24 @@
           <div class="principle-grid">
             <article class="principle">
               <span>01</span>
-              <h3>从具体任务开始</h3>
-              <p>先确认用户眼下要完成什么，再决定 AI 应该出现在流程的哪一部分。</p>
+              <h3>从具体卡点出发</h3>
+              <p>先找到学习与实践中真正阻碍用户继续前进的问题，再决定做什么产品。</p>
             </article>
             <article class="principle">
               <span>02</span>
-              <h3>让 AI 进入完整过程</h3>
-              <p>AI 参与澄清、生成、检查和迭代，而不只停留在一次回答或一段文案。</p>
+              <h3>让 AI 帮人跨过门槛</h3>
+              <p>让 AI 参与整理、澄清、搭建和检查，使复杂任务更容易开始。</p>
             </article>
             <article class="principle">
               <span>03</span>
-              <h3>留下可继续使用的成果</h3>
-              <p>文档、工作流、产品项目和学习记录，都能被评审、复盘和继续推进。</p>
+              <h3>让学习留下结果</h3>
+              <p>最终留下笔记、知识、PRD、工作流或产品方案，而不是一次性回答。</p>
             </article>
           </div>
 
           <div class="independent-note">
-            <strong>独立使用</strong>
-            <p>佐学的产品各自服务一种具体场景。你不需要先进入同一套流程，只需选择现在正在解决的问题。新的问题，也会带来新的产品。</p>
+            <strong>按需要独立使用</strong>
+            <p>佐学的产品不构成固定学习流程。遇到听课、写文档、搭工作流或设计 AI 产品的问题时，直接使用对应产品；新的学习与实践难题，也会带来新的产品。</p>
           </div>
         </div>
       </section>
@@ -1284,9 +1572,9 @@
       <section class="closing" aria-labelledby="closing-title">
         <div class="container closing-card">
           <div>
-            <h2 id="closing-title">从一个具体问题开始</h2>
+            <h2 id="closing-title">学习 AI，还有更多问题值得被解决</h2>
           </div>
-          <p>佐学会继续围绕真实的学习与工作场景，做更多具体、可用、可以长期使用的 AI 产品。</p>
+          <p>佐学会继续从学习与实践中的具体卡点出发，做更多独立、可用的 AI 产品。</p>
         </div>
       </section>
     </main>
@@ -1297,7 +1585,7 @@
         <div class="footer-links" aria-label="产品链接">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
-          <a href="#" data-coming-soon>Web Workflow</a>
+          <a href="#" data-coming-soon>Vibe Workflow</a>
           <a href="#" data-coming-soon>产品范式</a>
         </div>
       </div>

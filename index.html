@@ -886,7 +886,15 @@
         gap: 22px;
       }
 
-      .footer-links a:hover {
+      .footer-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 18px;
+      }
+
+      .footer-links a:hover,
+      .footer-beian:hover {
         color: var(--accent);
       }
 
@@ -1535,7 +1543,10 @@
 
     <footer>
       <div class="footer-inner container">
-        <div>© 2026 佐学</div>
+        <div class="footer-meta">
+          <div>© 2026 佐学</div>
+          <a class="footer-beian" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">京ICP备2022032893号-6</a>
+        </div>
         <div class="footer-links" aria-label="产品链接">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>

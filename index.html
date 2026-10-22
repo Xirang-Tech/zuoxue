@@ -484,9 +484,13 @@
         outline-offset: 5px;
       }
 
+      #aipm {
+        scroll-margin-top: 76px;
+      }
+
       .hero-directory {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(5, minmax(0, 1fr));
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
       }
@@ -899,6 +903,22 @@
       }
 
       @media (max-width: 1080px) {
+        .hero-directory {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .hero-directory a:nth-child(odd) {
+          border-left: 0;
+        }
+
+        .hero-directory a:nth-child(n + 3) {
+          border-top: 1px solid var(--line);
+        }
+
+        .hero-directory a:last-child {
+          grid-column: 1 / -1;
+        }
+
         .nav-links {
           gap: 18px;
         }
@@ -1285,6 +1305,7 @@
         <div class="nav-links" aria-label="旗下产品">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
+          <a href="https://workbench.zuoxue.com/" target="_blank" rel="noopener">AI PM 作品集</a>
           <a href="https://vibeworkflow.zuoxue.com/" target="_blank" rel="noopener">Vibe Workflow</a>
           <a href="https://pattern.zuoxue.com/" target="_blank" rel="noopener">产品范式</a>
         </div>
@@ -1295,6 +1316,7 @@
         <div class="mobile-panel" id="mobile-menu">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴 <span aria-hidden="true">↗</span></a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD <span aria-hidden="true">↗</span></a>
+          <a href="https://workbench.zuoxue.com/" target="_blank" rel="noopener">AI PM 作品集 <span aria-hidden="true">↗</span></a>
           <a href="https://vibeworkflow.zuoxue.com/" target="_blank" rel="noopener">Vibe Workflow <span aria-hidden="true">↗</span></a>
           <a href="https://pattern.zuoxue.com/" target="_blank" rel="noopener">产品范式 <span aria-hidden="true">↗</span></a>
           <a href="#products">查看产品 <span aria-hidden="true">↓</span></a>
@@ -1346,15 +1368,22 @@
                 <small>从一句需求生成 PRD、流程图和原型</small>
               </span>
             </a>
-            <a href="https://vibeworkflow.zuoxue.com/" target="_blank" rel="noopener">
+            <a href="https://workbench.zuoxue.com/" target="_blank" rel="noopener">
               <span class="hero-product-number">03</span>
+              <span class="hero-product-copy">
+                <strong>AI PM 作品集</strong>
+                <small>把行业经验做成可展示的 AI 作品集</small>
+              </span>
+            </a>
+            <a href="https://vibeworkflow.zuoxue.com/" target="_blank" rel="noopener">
+              <span class="hero-product-number">04</span>
               <span class="hero-product-copy">
                 <strong>Vibe Workflow</strong>
                 <small>用自然语言创建工作流</small>
               </span>
             </a>
             <a href="https://pattern.zuoxue.com/" target="_blank" rel="noopener">
-              <span class="hero-product-number">04</span>
+              <span class="hero-product-number">05</span>
               <span class="hero-product-copy">
                 <strong>产品范式</strong>
                 <small>把产品想法变成可落地的 AI 方案</small>
@@ -1438,10 +1467,42 @@
         </div>
       </article>
 
-      <article class="product-story" aria-labelledby="workflow-title">
+      <article class="product-story" id="aipm" aria-labelledby="aipm-title">
         <div class="story-grid container">
           <div class="story-copy">
             <span class="product-index">03</span>
+            <div class="product-heading">
+              <span class="product-name">AI PM 作品集</span>
+              <span class="product-type">AI 产品经理求职作品集工作台</span>
+            </div>
+            <h3 id="aipm-title">把行业经验，做成能展示、能讲清的 AI 作品集</h3>
+            <p class="story-lead">
+              从简历与目标岗位出发，拆解适合自己的作品方向，逐步完成作品设计、PRD、Demo、简历表达与面试准备；没有具体岗位，也可以直接开始创作。
+            </p>
+            <div class="story-moment">
+              <strong>适合这些场景</strong>
+              正在转型或求职 AI 产品经理，希望把已有行业经验做成作品，并留下可以展示、可以在面试中讲清的成果。
+            </div>
+            <span class="outcome-label">主要能力</span>
+            <div class="outcomes" aria-label="AI PM 作品集主要能力">
+              <span>岗位分析</span><span>作品设计</span><span>PRD 与 Demo</span><span>作品导出与分享</span><span>面试对练</span>
+            </div>
+            <a class="button" href="https://workbench.zuoxue.com/" target="_blank" rel="noopener">进入 AI PM 作品集 <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="story-visual">
+            <div class="screen-note top">岗位分析 · 作品设计 · 作品输出</div>
+            <div class="screen-frame contain">
+              <img src="./assets/aipm-workbench.png" width="1440" height="820" loading="lazy" alt="AI PM 作品集工作台的真实演示界面：完善资料后可新建目标岗位，或直接开始做作品" />
+            </div>
+            <div class="screen-note bottom">从岗位分析到作品交付，留下可以展示的成果</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-story" aria-labelledby="workflow-title">
+        <div class="story-grid container">
+          <div class="story-copy">
+            <span class="product-index">04</span>
             <div class="product-heading">
               <span class="product-name">Vibe Workflow</span>
               <span class="product-type">自然语言工作流生成器</span>
@@ -1473,7 +1534,7 @@
       <article class="product-story reverse" aria-labelledby="paradigm-title">
         <div class="story-grid container">
           <div class="story-copy">
-            <span class="product-index">04</span>
+            <span class="product-index">05</span>
             <div class="product-heading">
               <span class="product-name">产品范式</span>
               <span class="product-type">AI 产品改造工作台</span>
@@ -1550,6 +1611,7 @@
         <div class="footer-links" aria-label="产品链接">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴</a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD</a>
+          <a href="https://workbench.zuoxue.com/" target="_blank" rel="noopener">AI PM 作品集</a>
           <a href="https://vibeworkflow.zuoxue.com/" target="_blank" rel="noopener">Vibe Workflow</a>
           <a href="https://pattern.zuoxue.com/" target="_blank" rel="noopener">产品范式</a>
         </div>

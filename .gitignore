@@ -1,5 +1,5 @@
 .DS_Store
-membership/node_modules/
+/membership/node_modules
 membership/.env
 membership/coverage/
 membership/output/

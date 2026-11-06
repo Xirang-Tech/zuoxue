@@ -1,0 +1,5 @@
+{
+  "label": "演示价格，正式售价待公布",
+  "prices": { "monthly": 9900, "yearly": 79900 },
+  "defaultScenario": "unpaid"
+}

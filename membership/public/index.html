@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN" class="membership-center">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="一次开通，畅享佐学旗下五款产品会员。查看真实产品示例、独立额度与原会员保留规则。">
+  <title>联合大会员｜佐学</title><link rel="icon" href="/media/favicon.png"><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+  <aside class="source-preview-hint">
+    <p>请通过本地服务查看会员中心，样式和账号状态会一起加载。</p>
+    <a href="http://127.0.0.1:5105/account">打开本地会员中心</a>
+  </aside>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <div id="preview-note" class="preview-note" hidden>本地交互演示 · 不支持真实支付</div>
+  <div id="preview-controls" class="preview-controls" hidden><div class="shell preview-controls-inner"><label for="preview-scenario">查看演示状态</label><select id="preview-scenario"></select><span>仅本地预览可见 · 模拟操作不会产生扣款</span><div id="preview-actions"></div><p id="preview-error" class="error" role="alert"></p></div></div>
+  <header class="header shell"><a class="brand" href="https://zuoxue.com/"><span class="brand-mark">佐</span>佐学<span class="brand-divider"></span><span class="brand-sub">会员中心</span></a><nav aria-label="会员中心导航"><a id="products-link" href="#products" hidden>包含的产品</a><a href="#rules">会员说明</a><button id="login-trigger" class="button outline small">登录佐学账号</button></nav></header>
+  <main id="main" class="shell">
+    <section class="website-account" aria-labelledby="website-account-title">
+      <h1 id="website-account-title">会员中心</h1>
+      <p id="website-account-status" class="muted" role="status">正在读取账号状态…</p>
+      <div class="website-account-actions">
+        <button id="website-account-login" class="button primary" type="button" hidden>登录佐学账号</button>
+        <a id="website-products" class="button outline" href="https://zuoxue.com/#products">浏览佐学产品 ↗</a>
+      </div>
+    </section>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy"><p class="eyebrow">佐学联合大会员</p><h1 id="hero-title">一次开通，畅享 <span>5 款产品会员</span></h1><p class="intro">听课整理笔记、写需求、做作品、搭工作流、做产品诊断，按你手头的事选工具。</p>
+        <section id="products" class="showcase" aria-labelledby="showcase-title" hidden>
+          <div class="showcase-heading">
+            <h2 id="showcase-title">五款产品，各自能做什么</h2>
+            <a class="showcase-site-link" href="https://zuoxue.com/#products" target="_blank" rel="noopener noreferrer">去佐学官网了解更多 <span aria-hidden="true">↗</span><span class="visually-hidden">（在新标签页打开）</span></a>
+          </div>
+          <div id="product-tabs" class="product-tabs" role="tablist" aria-label="查看五款产品"></div>
+          <div id="product-panel" class="showcase-panel" role="tabpanel" tabindex="0">
+            <div class="showcase-summary">
+              <div class="showcase-product"><h3 id="showcase-name"></h3><span id="showcase-tier" class="tier"></span></div>
+              <p id="showcase-scene"></p>
+            </div>
+            <figure class="product-figure">
+              <button id="hero-screen" type="button" class="screen-button" aria-haspopup="dialog" aria-label="放大查看产品示例"></button>
+              <figcaption class="showcase-caption">
+                <div><span id="hero-image-label" class="image-label"></span><strong id="hero-caption"></strong></div>
+                <button id="hero-zoom" type="button" class="inline-button zoom-button" aria-haspopup="dialog"><img src="/media/icon-zoom.svg" alt="" width="18" height="18">放大查看</button>
+              </figcaption>
+            </figure>
+            <dl class="showcase-details">
+              <div><dt>适合谁</dt><dd id="showcase-audience"></dd></div>
+              <div><dt>怎么用</dt><dd id="showcase-steps"></dd></div>
+              <div><dt>能拿到什么</dt><dd id="showcase-result"></dd></div>
+            </dl>
+            <div class="showcase-entitlement">
+              <div><strong>本档会员包含</strong><span id="showcase-cycle"></span></div>
+              <p id="showcase-quota"></p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <aside id="purchase" class="purchase" aria-labelledby="purchase-title" tabindex="-1">
+        <div class="purchase-heading">
+          <div class="purchase-top"><h2 id="purchase-title"><img src="/media/icon-crown.svg" alt="" width="28" height="28">佐学联合大会员</h2></div>
+          <p class="purchase-summary">五款工具的会员权益，各产品额度单独计算</p>
+        </div>
+        <div class="purchase-body">
+          <div id="purchase-cycle" class="cycle" role="group" aria-label="购买周期">
+            <button id="monthly" type="button" aria-pressed="true">月卡<strong id="purchase-monthly-price" class="cycle-amount">价格待公布</strong><span>自开通起 1 个月</span></button>
+            <button id="yearly" type="button" aria-pressed="false">年卡<strong id="purchase-yearly-price" class="cycle-amount">价格待公布</strong><span>自开通起 12 个月</span></button>
+          </div>
+          <div id="purchase-pricing" class="pricing-block">
+            <div id="price" class="price" aria-live="polite">价格待公布</div>
+            <p id="price-disclaimer" class="price-disclaimer" hidden>演示价，正式售价待公布</p>
+            <p id="price-note" class="price-note">套餐开放时间待公布。</p>
+            <p class="price-note">一次性购买，到期不自动扣款</p>
+          </div>
+          <p id="purchase-state" class="state-label" aria-live="polite">正在读取会员状态…</p>
+          <button id="purchase-button" class="button primary" disabled>正在读取会员状态…</button><button id="renew-button" type="button" class="button outline explore-button" hidden>续期联合会员</button><a id="all-entitlements-link" class="button outline explore-button" href="#plan-details" hidden>查看全部权益<img src="/media/icon-arrow.svg" alt="" width="18" height="18"></a><p id="eligibility-note" class="purchase-foot" hidden></p>
+          <div id="purchase-benefits" class="purchase-benefits">
+            <div><img src="/media/icon-layers.svg" alt="" width="22" height="22"><strong>五款工具会员</strong><span>按需要，独立使用每一款工具</span></div>
+            <div><img src="/media/icon-coins.svg" alt="" width="22" height="22"><strong>各自独立额度</strong><span>点数、时长与项目包分别计算</span></div>
+            <div><img src="/media/icon-users.svg" alt="" width="22" height="22"><strong>原会员权益保留</strong><span>原会员剩余时间和未用套餐额度会保留，联合会员结束后接着用。<button id="preserve-link" class="inline-button" type="button">了解保留与恢复规则</button></span></div>
+            <div><img src="/media/icon-gift.svg" alt="" width="22" height="22"><strong>更高档位继续用</strong><span>已有更高档的产品，联合会员期间继续享受原档位。</span></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+    <div id="notice" class="notice" role="status" hidden></div>
+    <section id="account-panel" class="account-panel" aria-labelledby="account-title" hidden><div><p class="eyebrow">会员与订单状态</p><h2 id="account-title"></h2><p id="account-description"></p><p id="account-order" class="order-line"></p></div><div class="account-panel-actions"><button id="view-order" class="button outline" type="button" hidden>查看订单</button><a id="view-membership" class="button outline" href="#owned" hidden>查看各产品状态</a></div></section>
+    <div id="benefit-strip" class="benefit-strip" hidden><div><img src="/media/icon-zap.svg" alt="" width="28" height="28"><p><strong>从开通日起算</strong><span>月卡 1 个月，年卡 12 个月</span></p></div><div><img src="/media/icon-layers.svg" alt="" width="28" height="28"><p><strong>五款工具会员</strong><span>学习、文档、作品、工作流与方法论</span></p></div><div><img src="/media/icon-shield.svg" alt="" width="28" height="28"><p><strong>各自独立额度</strong><span>原有加量包依然可以继续使用</span></p></div><div><img src="/media/icon-clock.svg" alt="" width="28" height="28"><p><strong>原会员权益保留</strong><span>联合会员结束后，原会员接着用</span></p></div></div>
+    <section id="owned" class="owned" aria-labelledby="owned-title" hidden><div class="section-heading"><div><div class="eyebrow">YOUR MEMBERSHIP</div><h2 id="owned-title">你的联合会员</h2></div><p id="owned-expiry"></p></div><div id="owned-products" class="owned-grid"></div><a id="continue-task" class="button primary continue" href="https://zuoxue.com/">返回原产品继续使用 ↗</a></section>
+    <section id="plan-details" class="plan-details" aria-labelledby="plan-title" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow">功能、额度与使用周期</p><h2 id="plan-title">月卡和年卡权益对照</h2></div>
+      </div>
+      <p class="plan-scope-note">左列展示各产品的用途与套餐档位。具体功能范围、实际档位和额度以购买前确认的权益清单为准。</p>
+      <div class="details-cycle cycle" role="group" aria-label="权益对照的购买周期">
+        <button id="details-monthly" type="button" aria-pressed="true">月卡<span id="details-monthly-price"></span></button>
+        <button id="details-yearly" type="button" aria-pressed="false">年卡<span id="details-yearly-price"></span></button>
+      </div>
+      <div class="entitlement-table-wrap">
+        <table class="entitlement-table">
+          <caption class="visually-hidden">五款产品的月卡与年卡额度对照</caption>
+          <thead><tr><th scope="col">产品用途与会员档位</th><th id="monthly-column" scope="col">联合月卡</th><th id="yearly-column" scope="col">联合年卡</th></tr></thead>
+          <tbody id="entitlement-rows"></tbody>
+        </table>
+      </div>
+      <div class="purchase-guidance">
+        <h3>购买与使用须知</h3>
+        <dl>
+          <div><dt>有效期</dt><dd>按北京时间自开通日起算，月卡 1 个日历月，年卡 12 个日历月。目标月份没有对应日期时，取该月最后一天。</dd></div>
+          <div><dt>额度到账</dt><dd>首期额度在对应产品开通后到账。按月发放的年卡额度在后续会员月分期到账，标注一次到账的额度在开通后发放。</dd></div>
+          <div><dt>独立使用</dt><dd>各产品额度分别计算，不能跨产品兑换。独立购买的加量包和永久项目权益按原规则使用。</dd></div>
+          <div><dt>支付与续期</dt><dd>一次性购买，到期不自动扣款。提前续期从当前会员到期时间接续，当前周期的额度不会提前刷新。</dd></div>
+        </dl>
+        <a class="inline-button plan-rules-link" href="#rules">查看原会员保留、高档继承与退款规则<img src="/media/icon-arrow.svg" alt="" width="16" height="16"></a>
+      </div>
+    </section>
+    <section id="reasons" class="reasons" hidden><div class="section-heading"><div><p class="eyebrow">把会员买明白</p><h2>用得上好几款，一起开通更省心</h2></div></div><div class="reason-grid"><article><img src="/media/icon-layers.svg" alt="" width="26" height="26"><h3>按需要，换一款趁手的工具</h3><p>听课做笔记、写需求、做作品、搭工作流、分析方案。五款产品独立使用，按你的任务选择。</p></article><article><img src="/media/icon-users.svg" alt="" width="26" height="26"><h3>已买过的会员，留着接着用</h3><p>原单品剩余时长与未用套餐额度冻结保留，联合会员结束后恢复。独立加量包仍按原有效期使用。</p></article><article><img src="/media/icon-gift.svg" alt="" width="26" height="26"><h3>原来是高档，联合期间继续享有</h3><p>对应产品免费继承已有的更高档位；其他产品提供联合套餐标准档。支付前逐项核对实际权益。</p></article></div></section>
+    <section id="rules" class="rules" aria-labelledby="rules-title"><div><div class="eyebrow">A LITTLE MORE TO KNOW</div><h2 id="rules-title">买之前，<br>把这些弄明白。</h2><p class="muted">让每一份已有权益都被认真保留。</p></div><div class="faq"><details><summary>已经买过单品会员，会浪费吗？<span>＋</span></summary><p>联合会员开通后，原会员剩余时长及未使用套餐额度冻结保留，联合会员结束后再接着使用。支付前会逐个产品展示保留内容。</p></details><details><summary>原来是旗舰版，联合期间是什么档位？<span>＋</span></summary><p>对应产品在联合会员期间免费继承原有更高档位，其他产品使用联合套餐的标准付费档。例如原旗舰版还剩 20 天，联合会员期间继续享受旗舰权益，结束后再恢复原有 20 天。</p></details><details><summary>会员是不是可以无限使用 AI？<span>＋</span></summary><p>每个产品都有独立的额度、消耗与发放规则。购买前会列出具体额度及有效期；年卡分期额度按期到账。联合会员不包含无限量 AI 使用。</p></details><details><summary>以前开通的自动续费怎么处理？<span>＋</span></summary><p>购买前需要先在原产品取消自动续费并等待确认，避免联合会员期间继续扣费。已经支付的剩余权益会保留。</p></details><details><summary>到期或退款后，之前的内容还在吗？<span>＋</span></summary><p>历史内容会保留；具体可编辑、可导出范围按对应产品到期规则执行。退款由客服审核后按整笔联合订单处理，原会员权益恢复使用。</p></details><details><summary>月卡和年卡，额度什么时候到账？<span>＋</span></summary><p>首期额度在对应产品开通后到账。年卡的月度额度在各会员月分期发放，一次到账的额度在开通后发放。各产品的具体发放与过期规则见上方权益对照。</p></details><details><summary>提前续期，会立刻补充额度吗？<span>＋</span></summary><p>提前续期在当前联合会员到期时间后接续，不立即刷新本期额度。连续续期沿用首次冻结的原会员快照和高档继承规则；期间不重复冻结或恢复。联合期间可以加购额度，暂不新增会与冻结规则冲突的单品订阅。</p></details><details><summary>原来的加量包、项目和已用额度怎么处理？<span>＋</span></summary><p>原套餐未使用额度与剩余时间冻结保留，恢复时接着使用，不重新发放已经消耗的额度。单独购买的加量包及永久项目权益保留，仍按各自原有效期使用。</p></details><details><summary>五款产品有一款没开通，怎么办？<span>＋</span></summary><p>支付成功后逐项同步权益，页面会显示具体开通状态；失败会自动重试。尚未全部确认前不会显示“全部开通”。如果已经付款，请继续查看原订单与开通进度，避免重复购买。</p></details><details><summary>如何退款，原会员会怎么恢复？<span>＋</span></summary><p>首期由客服人工审核，按整笔联合订单处理，不支持单独退其中一款产品。退款确认后撤回该笔联合权益并恢复应恢复的原会员，保留历史内容；退款进度与权益恢复进度分别展示。存在其他有效联合订单时，剩余会员以实际状态为准，不承诺未经确认的退款到账时间。</p></details></div></section>
+    <section id="closing" class="closing" hidden><div><p class="eyebrow">佐学联合大会员</p><h2>给下一件想做的事，备好工具。</h2><p>先看清权益，再选择适合自己的使用周期。</p></div><a class="button primary" href="#purchase">查看会员套餐<img src="/media/icon-arrow.svg" alt="" width="20" height="20"></a></section>
+  </main>
+  <footer class="footer shell"><a class="brand" href="https://zuoxue.com/">佐学</a><p>做学问，用佐学。</p><a id="return-link" href="https://zuoxue.com/">返回佐学官网</a></footer>
+  <div id="mobile-action" class="mobile-action" hidden><div><strong id="mobile-title">佐学联合大会员</strong><span id="mobile-price">价格待公布</span></div><a id="mobile-link" class="button primary" href="#purchase">查看会员套餐</a></div>
+  <dialog id="login-dialog"><form id="login-form"><button type="button" class="dialog-close" aria-label="关闭登录">×</button><div class="eyebrow">ZUOXUE ACCOUNT</div><h2>登录你的佐学账号</h2><p class="muted">使用任一佐学产品已有的账号。</p><label>手机号或邮箱<input name="identifier" autocomplete="username" required maxlength="200"></label><label>密码<input name="password" type="password" autocomplete="current-password" required maxlength="200"></label><p id="login-error" class="error" role="alert"></p><button type="submit" class="button primary">登录并查看会员</button></form></dialog>
+  <dialog id="checkout-dialog" aria-labelledby="checkout-title">
+    <div class="checkout-inner">
+      <header class="checkout-head">
+        <div>
+          <h2 id="checkout-title">确认开通联合会员</h2>
+          <p id="checkout-demo-note" class="price-disclaimer" hidden>模拟订单 · 不会创建真实订单或扣款</p>
+        </div>
+        <button type="button" class="dialog-close" aria-label="关闭订单确认">×</button>
+      </header>
+      <div id="checkout-body" class="checkout-body" role="region" aria-label="产品权益与订单内容" tabindex="0">
+        <div id="quote-content"></div>
+        <div id="payment" hidden>
+          <img id="payment-qr" width="240" height="240" alt="使用微信扫描支付二维码">
+          <p id="payment-status" aria-live="polite">请使用微信扫码；支付结果将自动更新。</p>
+          <div id="demo-payment" class="demo-payment" hidden>
+            <strong>模拟支付，不产生扣款</strong>
+            <p>这里不提供可支付二维码，仅用于查看后续状态。</p>
+            <button id="demo-pay-success" type="button" class="button primary">模拟支付成功</button>
+            <button id="demo-pay-failure" type="button" class="button outline">模拟支付失败</button>
+          </div>
+          <button id="refresh-order" type="button" class="button outline">刷新订单状态</button>
+          <button id="close-order" type="button" class="button outline">关闭待支付订单</button>
+        </div>
+      </div>
+      <footer class="checkout-footer">
+        <div class="quote-total"><span id="checkout-plan"></span><strong id="checkout-amount"></strong></div>
+        <p id="checkout-meta" class="checkout-meta"></p>
+        <label class="agreement"><input id="agreement" type="checkbox">我已核对各产品权益、原会员保留内容和一次性购买说明</label>
+        <p id="checkout-error" class="error" role="alert"></p>
+        <button id="pay-button" type="button" class="button primary" disabled>确认并获取付款码</button>
+      </footer>
+    </div>
+  </dialog>
+  <dialog id="image-dialog" class="image-dialog" aria-labelledby="image-title"><div class="image-dialog-head"><div><h2 id="image-title"></h2><p id="image-description"></p></div><button type="button" class="dialog-close" aria-label="关闭产品图片"><img src="/media/icon-close.svg" alt="" width="24" height="24"></button></div><p class="image-pan-hint">左右滑动图片，查看清晰细节</p><div id="image-content" class="image-content" tabindex="0" role="region" aria-label="产品图片详情，可左右滚动"></div><p class="image-disclaimer">产品示例用于展示功能；实际会员档位、额度和有效期，以订单确认清单为准。</p></dialog>
+</body></html>

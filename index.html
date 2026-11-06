@@ -130,6 +130,43 @@
         color: var(--accent);
       }
 
+      .nav-account {
+        display: flex;
+        flex: none;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .nav-login {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--ink-soft);
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .nav-login:hover {
+        color: var(--accent);
+      }
+
+      .nav-membership {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        padding: 0 13px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--paper-soft);
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .nav-membership:hover {
+        border-color: var(--ink-soft);
+      }
+
       .button {
         display: inline-flex;
         align-items: center;
@@ -234,11 +271,8 @@
         box-shadow: 0 16px 42px rgba(47, 41, 37, 0.11);
       }
 
-      .mobile-panel.is-open {
-        display: grid;
-      }
-
-      .mobile-panel a {
+      .mobile-panel a,
+      .mobile-panel .nav-login {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -249,7 +283,7 @@
         font-weight: 600;
       }
 
-      .mobile-panel a:last-child {
+      .mobile-panel > :last-child {
         border-bottom: 0;
       }
 
@@ -974,7 +1008,19 @@
           display: none;
         }
 
+        .nav-account {
+          gap: 8px;
+        }
+
+        .nav-account .nav-login {
+          display: none;
+        }
+
         .mobile-toggle {
+          display: grid;
+        }
+
+        .mobile-panel.is-open {
           display: grid;
         }
 
@@ -1293,6 +1339,49 @@
         }
       }
 
+      .site-toast {
+        position: fixed;
+        top: max(88px, env(safe-area-inset-top, 0px) + 72px);
+        left: 50%;
+        z-index: 80;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: max-content;
+        max-width: min(420px, calc(100vw - 32px));
+        padding: 14px 18px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: rgba(252, 251, 248, 0.96);
+        box-shadow: var(--shadow);
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1.4;
+        transform: translate(-50%, -12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 220ms ease;
+      }
+
+      .site-toast[hidden] {
+        display: none !important;
+      }
+
+      .site-toast.is-visible {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      .site-toast-dot {
+        flex: 0 0 auto;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
     </style>
   </head>
   <body>
@@ -1310,9 +1399,13 @@
           <a href="https://pattern.zuoxue.com/" target="_blank" rel="noopener">产品范式</a>
         </div>
 
-        <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="打开产品菜单">
-          <span aria-hidden="true"></span>
-        </button>
+        <div class="nav-account">
+          <button class="nav-login" type="button" data-coming-soon="官网登录暂未开放">登录</button>
+          <a class="nav-membership" data-membership-link href="https://member.zuoxue.com/account">会员中心</a>
+          <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="打开产品菜单">
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
         <div class="mobile-panel" id="mobile-menu">
           <a href="https://keban.zuoxue.com/" target="_blank" rel="noopener">课伴 <span aria-hidden="true">↗</span></a>
           <a href="https://aiprd.zuoxue.com/zh" target="_blank" rel="noopener">AI PRD <span aria-hidden="true">↗</span></a>
@@ -1320,6 +1413,7 @@
           <a href="https://vibeworkflow.zuoxue.com/" target="_blank" rel="noopener">Vibe Workflow <span aria-hidden="true">↗</span></a>
           <a href="https://pattern.zuoxue.com/" target="_blank" rel="noopener">产品范式 <span aria-hidden="true">↗</span></a>
           <a href="#products">查看产品 <span aria-hidden="true">↓</span></a>
+          <button class="nav-login" type="button" data-coming-soon="官网登录暂未开放">登录</button>
         </div>
       </nav>
     </header>
@@ -1618,10 +1712,41 @@
       </div>
     </footer>
 
+    <div class="site-toast" id="site-toast" role="status" aria-live="polite" hidden>
+      <span class="site-toast-dot" aria-hidden="true"></span>
+      <span class="site-toast-text">暂未上线，敬请期待</span>
+    </div>
+
     <script>
       (() => {
         const toggle = document.querySelector(".mobile-toggle");
         const menu = document.querySelector("#mobile-menu");
+        const toast = document.querySelector("#site-toast");
+        const toastText = toast?.querySelector(".site-toast-text");
+        let hideTimer;
+        let clearTimer;
+
+        const showToast = (message = "暂未上线，敬请期待") => {
+          if (!toast || !toastText) return;
+          toastText.textContent = message;
+          clearTimeout(hideTimer);
+          clearTimeout(clearTimer);
+          toast.hidden = false;
+          requestAnimationFrame(() => toast.classList.add("is-visible"));
+          hideTimer = setTimeout(() => {
+            toast.classList.remove("is-visible");
+            clearTimer = setTimeout(() => {
+              toast.hidden = true;
+            }, 220);
+          }, 2400);
+        };
+
+        document.addEventListener("click", (event) => {
+          const link = event.target.closest("[data-coming-soon]");
+          if (!link) return;
+          event.preventDefault();
+          showToast(link.dataset.comingSoon || undefined);
+        });
 
         if (!toggle || !menu) return;
 
@@ -1637,10 +1762,14 @@
 
         menu.addEventListener("click", (event) => {
           if (event.target.closest("a")) setOpen(false);
+          if (event.target.closest(".nav-login")) {
+            setOpen(false);
+            toggle.focus();
+          }
         });
 
         document.addEventListener("keydown", (event) => {
-          if (event.key === "Escape") {
+          if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
             setOpen(false);
             toggle.focus();
           }
@@ -1651,5 +1780,6 @@
         });
       })();
     </script>
+    <script type="module" src="./assets/union-entry.js"></script>
   </body>
 </html>

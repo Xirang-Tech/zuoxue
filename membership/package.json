@@ -1,0 +1,20 @@
+{
+  "name": "@zuoxue/membership",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": { "node": ">=22.14" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.mjs",
+    "preview": "node server/preview.mjs",
+    "migrate": "node --env-file-if-exists=.env scripts/migrate.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:db": "node --test tests/database/*.test.mjs",
+    "local:prepare": "node scripts/prepare-local-integration.mjs",
+    "local:db": "node scripts/start-local-database.mjs",
+    "local:start": "node scripts/run-local-integration.mjs",
+    "local:verify": "node scripts/verify-local-integration.mjs"
+  },
+  "dependencies": { "pg": "^8.23.0", "qrcode": "^1.5.4" }
+}

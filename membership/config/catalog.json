@@ -1,0 +1,159 @@
+{
+  "version": "union-v1-draft",
+  "approved": false,
+  "costApproved": false,
+  "currency": "CNY",
+  "plans": [
+    {
+      "id": "monthly",
+      "name": "联合月卡",
+      "months": 1,
+      "priceCents": null
+    },
+    {
+      "id": "yearly",
+      "name": "联合年卡",
+      "months": 12,
+      "priceCents": null
+    }
+  ],
+  "products": [
+    {
+      "id": "keban",
+      "name": "课伴",
+      "tierId": "pro",
+      "tierName": "Pro",
+      "tierRank": 1,
+      "url": "https://keban.zuoxue.com/",
+      "description": "听课转写、知识点与学习笔记",
+      "verified": false,
+      "quotaDescription": "Pro 全部标准知识库；月卡 30 小时转写，年卡 400 小时全年可用；待发布审核",
+      "grants": {
+        "monthly": [
+          {
+            "unit": "transcription_seconds",
+            "amount": 108000,
+            "schedule": "monthly"
+          }
+        ],
+        "yearly": [
+          {
+            "unit": "transcription_seconds",
+            "amount": 1440000,
+            "schedule": "upfront"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aiprd",
+      "name": "AI PRD",
+      "tierId": "pro",
+      "tierName": "个人专业档",
+      "tierRank": 1,
+      "url": "https://aiprd.zuoxue.com/zh/home",
+      "description": "需求文档、流程图与可点击原型",
+      "verified": false,
+      "quotaDescription": "专业档功能与 AI 积分，待产品方确认",
+      "grants": {
+        "monthly": [],
+        "yearly": []
+      }
+    },
+    {
+      "id": "aipm",
+      "name": "AI PM 作品集",
+      "tierId": "pro",
+      "tierName": "专业版",
+      "tierRank": 1,
+      "url": "https://workbench.zuoxue.com/",
+      "description": "作品设计、Demo 与面试准备",
+      "verified": false,
+      "quotaDescription": "专业版功能，每个会员月到账 800 点，未用点数当期结束失效；待发布审核",
+      "grants": {
+        "monthly": [
+          {
+            "unit": "credits",
+            "amount": 800,
+            "schedule": "monthly"
+          }
+        ],
+        "yearly": [
+          {
+            "unit": "credits",
+            "amount": 800,
+            "schedule": "monthly"
+          }
+        ]
+      }
+    },
+    {
+      "id": "workflow",
+      "name": "Vibe Workflow",
+      "tierId": "pro",
+      "tierName": "专业版",
+      "tierRank": 1,
+      "url": "https://vibeworkflow.zuoxue.com/",
+      "description": "自然语言搭工作流、模拟与导出",
+      "verified": false,
+      "quotaDescription": "专业版功能，每个会员月到账 300 点，未用点数当期结束失效；待发布审核",
+      "grants": {
+        "monthly": [
+          {
+            "unit": "credits",
+            "amount": 300,
+            "schedule": "monthly"
+          }
+        ],
+        "yearly": [
+          {
+            "unit": "credits",
+            "amount": 300,
+            "schedule": "monthly"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pattern",
+      "name": "产品范式",
+      "tierId": "pro",
+      "tierName": "顾问 Pro",
+      "tierRank": 1,
+      "url": "https://pattern.zuoxue.com/",
+      "description": "范式诊断、产品方案与汇报材料",
+      "verified": false,
+      "quotaDescription": "每个会员月到账 3 个项目包（会员期内最多累计 6 个）与 30 次当期工具额度；待发布审核",
+      "grants": {
+        "monthly": [
+          {
+            "unit": "projects",
+            "amount": 3,
+            "schedule": "monthly",
+            "validity": "membership"
+          },
+          {
+            "unit": "tools",
+            "amount": 30,
+            "schedule": "monthly",
+            "validity": "period"
+          }
+        ],
+        "yearly": [
+          {
+            "unit": "projects",
+            "amount": 3,
+            "schedule": "monthly",
+            "validity": "membership"
+          },
+          {
+            "unit": "tools",
+            "amount": 30,
+            "schedule": "monthly",
+            "validity": "period"
+          }
+        ]
+      }
+    }
+  ]
+}

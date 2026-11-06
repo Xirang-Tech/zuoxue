@@ -1,0 +1,7 @@
+.DS_Store
+membership/node_modules/
+membership/.env
+membership/coverage/
+membership/output/
+membership/handoff/*.zip
+worktrees/
